@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  output: 'export', // Enables static export
+  basePath: '/couzhei.github.io', // Add basePath for GitHub Pages
+  assetPrefix: '/couzhei.github.io/', // Add assetPrefix for GitHub Pages
 };
 
-export default nextConfig;
+module.exports = nextConfig;
