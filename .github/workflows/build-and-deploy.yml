@@ -22,22 +22,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js (with pnpm via Corepack)
+      # 1) Install pnpm explicitly
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8 # or match your local version
+          run_install: false # we'll run pnpm install ourselves
+
+      # 2) Then set up Node and enable pnpm cache
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Ensure pnpm (Corepack)
-        run: |
-          corepack enable
-          corepack prepare pnpm@^8 --activate
-
       - name: Install dependencies
         run: pnpm install
 
       - name: Build site
-        run: pnpm run build # make sure this writes to ./_output (or change below)
+        run: pnpm run build # ensure this outputs to ./_output or ./_site
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -45,7 +48,7 @@ jobs:
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./_output # or ./_site if that’s your Eleventy output
+          path: ./_output # change to ./_site if that’s where Eleventy builds
 
   deploy:
     runs-on: ubuntu-latest
