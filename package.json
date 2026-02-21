@@ -8,6 +8,6 @@
   "scripts": {
     "build": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs",
     "serve": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs --serve",
-    "build-ghpages": "pnpm run build -- --pathprefix=/your-repo-name/"
+    "build-ghpages": "pnpm run build -- --pathprefix=/couzhei.github.io/"
   }
 }

@@ -16,31 +16,30 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DEFAULT_MODEL: gpt-5-mini
 
     steps:
       - uses: actions/checkout@v4
 
-      # 1) Install pnpm explicitly
+      # 1) Install pnpm FIRST
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 8 # or match your local version
-          run_install: false # we'll run pnpm install ourselves
+          version: 8 # match your local pnpm major
+          run_install: false
 
-      # 2) Then set up Node and enable pnpm cache
+      # 2) Then Node, with pnpm cache
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
 
+      # 3) Use pnpm directly instead of npm wrapping pnpm
       - name: Install dependencies
         run: pnpm install
 
       - name: Build site
-        run: pnpm run build # ensure this outputs to ./_output or ./_site
+        run: pnpm run build -- --pathprefix=/your-repo-name/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -48,7 +47,7 @@ jobs:
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./_output # change to ./_site if that’s where Eleventy builds
+          path: ./_output # or ./_site
 
   deploy:
     runs-on: ubuntu-latest
