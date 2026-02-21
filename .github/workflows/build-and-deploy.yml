@@ -11,20 +11,32 @@ jobs:
       DEFAULT_MODEL: gpt-5-mini
     steps:
       - uses: actions/checkout@v4
-      - name: Setup node
+
+      - name: Setup Node.js (with pnpm via Corepack)
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+          cache: "pnpm"
+
+      - name: Ensure pnpm (Corepack)
+        run: |
+          corepack enable
+          corepack prepare pnpm@^8 --activate
+
       - name: Install dependencies
         run: pnpm install
+
       - name: Build site
         run: pnpm run build
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_output
+          path: ./_output
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        with: {}
