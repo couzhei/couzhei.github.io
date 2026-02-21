@@ -1,9 +1,13 @@
 {
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.2"
+    "@11ty/eleventy": "^3.1.2",
+    "typescript": "^5.5.0",
+    "tsx": "^3.12.7",
+    "ts-node": "^10.9.1"
   },
   "scripts": {
-    "build": "npx @11ty/eleventy",
-    "build-ghpages": "npx @11ty/eleventy --pathprefix=/your-repo-name/"
+    "build": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs",
+    "serve": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs --serve",
+    "build-ghpages": "pnpm run build -- --pathprefix=/your-repo-name/"
   }
 }
