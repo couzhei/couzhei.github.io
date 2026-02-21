@@ -1,0 +1,17 @@
+
+.env
+# Ignore node_modules and build output
+node_modules/
+.next/
+dist/
+.env.local
+.cache/
+# Ignore logs
+*.log
+# Ignore OS files
+.DS_Store
+Thumbs.db
+# Ignore 11ty output
+_output/
+# Ignore temporary files
+*.tmp
