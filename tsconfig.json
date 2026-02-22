@@ -11,7 +11,7 @@
         "outDir": "dist"
     },
     "include": [
-        "src",
+        "content",
         "*.ts",
         "**/*.ts",
         "**/*.11ty.ts"

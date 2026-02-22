@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="hero">
+  <h1>{{ title }}</h1>
+  <div class="lead">
+    {{ content | safe }}
+  </div>
+</section>
+
+<section>
+  <h2>Latest Posts</h2>
+  {% include "postslist.njk" %}
+</section>

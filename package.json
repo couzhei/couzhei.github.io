@@ -6,8 +6,7 @@
     "typescript": "^5.9.3"
   },
   "scripts": {
-    "build": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs",
-    "serve": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs --serve",
-    "build-ghpages": "npx pnpm run build -- --pathprefix=/couzhei.github.io/"
+    "build": "npx @11ty/eleventy",
+    "serve": "npx @11ty/eleventy --serve"
   }
 }
