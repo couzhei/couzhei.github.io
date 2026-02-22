@@ -1,9 +1,9 @@
 {
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
-    "typescript": "^5.5.0",
-    "tsx": "^3.12.7",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.2",
+    "tsx": "^3.14.0",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "build": "node -r ts-node/register ./node_modules/@11ty/eleventy/cmd.cjs",
